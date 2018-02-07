@@ -1774,7 +1774,11 @@ config_other_modes(
 					   &addr_sock, 1, t_UNK)) {
 				proto_config(PROTO_MULTICAST_ADD, 0, 0.,
 					     &addr_sock);
+			} else {
+				msyslog(LOG_ERR, "invalid multicastclient address: %s", addr_node->address);
+				exit(-1);
 			}
+
 			addr_node = addr_node->link;
 		} while (addr_node != NULL);
 		proto_config(PROTO_MULTICAST_ADD, 1, 0., NULL);
